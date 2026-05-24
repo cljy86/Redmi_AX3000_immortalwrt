@@ -61,10 +61,15 @@ jobs:
             CONFIG_SDK=y
             CONFIG_MAKE_TOOLCHAIN=y
 
-            CONFIG_ALL_NONSHARED=y
             CONFIG_REPRODUCIBLE_DEBUG_INFO=y
 
             CONFIG_PACKAGE_luci=y
+            CONFIG_PACKAGE_luci-i18n-base-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-network-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-firewall-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-wireless-zh-cn=y
+            CONFIG_PACKAGE_luci-theme-bootstrap=y
+            CONFIG_PACKAGE_luci-compat=y
           EOF
           make defconfig
 
@@ -184,10 +189,10 @@ jobs:
             Release version: ${TAG}
 
             ## Sources
-            $(cat bin/targets/qualcommax/ipq50xx/feeds.buildinfo | awk -F'[ ^]' '{printf "%s: `%s`\n", $2, $4}')
+            $(cat bin/targets/qualcommax/ipq50xx/feeds.buildinfo | awk -F'[ ^]' '{printf "%s: \`%s\`\n", $2, $4}')
 
             ## SHA256
-            $(cat bin/targets/qualcommax/ipq50xx/sha256sums | awk '{printf "%s: `%s`\n", $2, $1}' | sed -E 's/^\*//')
+            $(cat bin/targets/qualcommax/ipq50xx/sha256sums | awk '{printf "%s: \`%s\`\n", $2, $1}' | sed -E 's/^\*//')
           EOF
 
           echo "NAME=$(head --line=1 Release.md)" >>$GITHUB_ENV
